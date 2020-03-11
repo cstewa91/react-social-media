@@ -1,14 +1,17 @@
-import React from 'react';
-import '../assets/css/app.scss';
-import logo from '../assets/images/logo.svg';
+import React, { Component, Fragment } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-const App = () => (
-    <div className="app">
-        <div className="welcome">
-            <img src={logo} className="logo rotate"/>
-            <h1>Welcome To React</h1>
-        </div>
-    </div>
-);
+
+class App extends Component {
+    render() {
+        return (
+            <Fragment>
+                <Switch>
+
+                </Switch>
+            </Fragment>
+        )
+    }
+}
 
 export default App;

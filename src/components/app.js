@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Login from './login/login';
 
 
 class App extends Component {
@@ -7,7 +8,7 @@ class App extends Component {
         return (
             <Fragment>
                 <Switch>
-
+                    <Route exact path="/" component={Login} />
                 </Switch>
             </Fragment>
         )

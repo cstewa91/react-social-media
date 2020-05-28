@@ -15,7 +15,7 @@ class Login extends Component {
       return (
          <div className="container">
             <div className="title-container">
-               <h1 className="title">Book Worms</h1>
+               <h1 className="title">Campus Life</h1>
             </div>
             <form className="login-form" onSubmit={handleSubmit(this.login)}>
                <div className="input-container">

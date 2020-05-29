@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { loginToApp } from '../../actions'
 import Input from '../input/input';
 import './login.css';
 
 
 class Login extends Component {
+   handleLogin = async (values) => {
+      await this.props.loginToApp(values)
+   }
    login = () => {
          this.props.history.push('/home')
    }
@@ -17,7 +21,7 @@ class Login extends Component {
             <div className="title-container">
                <h1 className="title">Campus Life</h1>
             </div>
-            <form className="login-form" onSubmit={handleSubmit(this.login)}>
+            <form className="login-form" onSubmit={handleSubmit(this.handleLogin)}>
                <div className="input-container">
                   <Field name="email" label="E-mail" component={Input} inputClassName="login-user-input" labelClassName="label-login-color"/>
                </div>
@@ -52,6 +56,9 @@ function mapStateToProps(state) {
 //       signInError: state.login.signInError,
 //       auth: state.login.auth
 //    }
+return {
+   
+}
 }
 
 Login = reduxForm({
@@ -59,4 +66,7 @@ Login = reduxForm({
    validate: validate
 })(Login);
 
-export default (Login);
+export default connect(mapStateToProps, {
+   loginToApp: loginToApp,
+})(Login);
+

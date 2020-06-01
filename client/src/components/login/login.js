@@ -4,15 +4,20 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { loginToApp } from '../../actions'
 import Input from '../input/input';
+import Cookies from 'js-cookie';
 import './login.css';
 
 
 class Login extends Component {
    handleLogin = async (values) => {
       await this.props.loginToApp(values)
+      console.log(this.props.loggedIn)
    }
    login = () => {
          this.props.history.push('/home')
+   }
+   componentDidMount = () => {
+      console.log(Cookies.get())
    }
    render() {
       const { handleSubmit, signInError } = this.props
@@ -52,13 +57,9 @@ function validate({ email, password }) {
 }
 
 function mapStateToProps(state) {
-//    return {
-//       signInError: state.login.signInError,
-//       auth: state.login.auth
-//    }
-return {
-   
-}
+   return {
+      loggedIn: state.login.loggedIn
+   }
 }
 
 Login = reduxForm({

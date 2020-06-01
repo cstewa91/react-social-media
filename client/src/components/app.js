@@ -8,6 +8,7 @@ import Clubs from './clubs/clubs';
 import Events from './school-events/events';
 import StudyGroups from './study-groups/study-groups';
 import Header from './header/header';
+import Reroute from './reroute/reroute'
 
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route path='/create-account' component={CreateNewAccount} />
-                    <Route path="/home" component={Home} />
+                    <Route path="/home" component={Reroute(Home)} />
                     <Route path='/books' component={Books} />
                     <Route path='/clubs' component={Clubs} />
                     <Route path='/events' component={Events} />

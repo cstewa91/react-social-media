@@ -8,16 +8,21 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import types from './actions/types';
 
-
 import App from './components/app';
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk, reduxPromise));
 
+if(localStorage.getItem('loggedIn')){
+    store.dispatch({
+        type: types.LOGIN_TO_APP
+    });
+};
+
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
-            <App />
-        </Router>
+            <Router>
+                <App />
+            </Router>
     </Provider>,
     document.getElementById('root')
 );

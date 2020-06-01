@@ -11,30 +11,32 @@ connection.connect(err => {
   console.log('MySql connected...');
 });
 
+
 module.exports = function (app) {
   //LOGIN
   app.post('/api/login', (req, res) => {
-    if (!req.body['email'] || !req.body['password']) return res.send('Email and password required');
-
     const email = req.body['email'];
     const password = req.body['password'];
     const query = `SELECT account, password, email FROM users WHERE email = '${email}'`;
-
     connection.query(query, (err, results) => {
-      if (err) {
-        return res.send('Invalid Email');
-      } else if (results.length) {
+      if(err) {
+        return res.send({
+          success: false
+        })
+      } else if(results.length > 0) {
         const hashedPassword = results[0].password;
-
         bcrypt.compare(password, hashedPassword, function (errObj, resultObj) {
           if (resultObj) {
             req.session.user = String(results[0].account)
             return res.send({
-              token: req.session.user,
               success: true
             })
+          } else {
+            res.send({
+              success: false
+            });
           }
-        });
+        }); 
       } else {
         res.send({
           success: false
@@ -42,6 +44,7 @@ module.exports = function (app) {
       }
     });
   });
+
 
   //CREATE USER
   app.post('/api/users', encryptPassword, (req, res) => {
@@ -56,25 +59,25 @@ module.exports = function (app) {
 
     connection.query(createQuery, (err, results) => {
       if (err) {
-        if (err.code === 'ER_DUP_ENTRY') {
-          const field = err.sqlMessage.match(/(?<=key)\W*(\w+)/)[1];
-          const message = `This ${field} already exists.`;
-          return res.send(message);
-        }
-
-        console.log(err);
-        return res.send('Database query error.');
+        return res.send({
+          success: false
+        })
       } else {
-        const query = `SELECT id
+        const query = `SELECT account
                           FROM users
                           WHERE email = '${email}'`;
 
         connection.query(query, (err, results) => {
-          if (err) {
-            console.log(err);
-            return res.send('Database query error');
+          if(err) {
+            return res.send({
+              success: false
+            })
+          } else {
+            req.session.user = String(results[0].account)
+            return res.send({
+              success: true
+            })
           }
-
         });
       }
     });
@@ -88,3 +91,5 @@ function encryptPassword(req, res, next) {
 
   next();
 }
+
+

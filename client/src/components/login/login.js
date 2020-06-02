@@ -4,20 +4,19 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { loginToApp } from '../../actions'
 import Input from '../input/input';
-import Cookies from 'js-cookie';
 import './login.css';
 
 
 class Login extends Component {
    handleLogin = async (values) => {
       await this.props.loginToApp(values)
-      console.log(this.props.loggedIn)
+      await this.props.loggedIn ? this.login() : ''
    }
    login = () => {
          this.props.history.push('/home')
    }
    componentDidMount = () => {
-      console.log(Cookies.get())
+      this.props.loggedIn ? this.login() : ''
    }
    render() {
       const { handleSubmit, signInError } = this.props

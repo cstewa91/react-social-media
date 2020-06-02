@@ -7,12 +7,14 @@ import reduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import types from './actions/types';
+import Cookies from 'js-cookie';
 
 import App from './components/app';
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk, reduxPromise));
 
-if(localStorage.getItem('loggedIn')){
+console.log(Cookies.get('token'))
+if(Cookies.get('token')) {
     store.dispatch({
         type: types.LOGIN_TO_APP
     });

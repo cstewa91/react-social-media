@@ -13,6 +13,7 @@ connection.connect(err => {
 
 
 module.exports = function (app) {
+  app.use(getUserAccount)
   //LOGIN
   app.post('/api/login', (req, res) => {
     const email = req.body['email'];
@@ -27,9 +28,17 @@ module.exports = function (app) {
         const hashedPassword = results[0].password;
         bcrypt.compare(password, hashedPassword, function (errObj, resultObj) {
           if (resultObj) {
-            req.session.user = String(results[0].account)
-            return res.send({
-              success: true
+            const account = results[0].account;
+            const token = createToken();
+            const query = `INSERT INTO sessions (account, token) VALUES('${account}','${token}') ON DUPLICATE KEY UPDATE token = '${token}'`;
+            connection.query(query, (err, results) => {
+              if(err) {
+                return res.send(err)
+              }
+              res.cookie('token', token, {maxAge: 60 * 60 * 1000 * 1, httpOnly: false})
+              return res.send({
+                success: true
+              })
             })
           } else {
             res.send({
@@ -73,15 +82,37 @@ module.exports = function (app) {
               success: false
             })
           } else {
-            req.session.user = String(results[0].account)
-            return res.send({
-              success: true
+            const account = String(results[0].account)
+            const token = createToken();
+            const query = `INSERT INTO sessions (account, token) VALUES('${account}','${token}') ON DUPLICATE KEY UPDATE token = '${token}'`;
+            connection.query(query, (err, results) => {
+              if(err) {
+                return res.send(err)
+              }
+              res.cookie('token', token, {maxAge: 60 * 60 * 1000 * 1, httpOnly: false})
+              return res.send({
+                success: true
+              })
             })
           }
         });
       }
     });
   });
+
+  // GET USER INFO
+  app.get('/api/users', (req, res) => {
+    const account = String(req.body.account);
+    const query = `SELECT firstname, lastname, email FROM users where account = '${account}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send({success: false})
+      } else {
+        return res.send(results)
+      }
+    })
+  })
+
 }
 
 function encryptPassword(req, res, next) {
@@ -90,6 +121,25 @@ function encryptPassword(req, res, next) {
   body['password'] = bcrypt.hashSync(body['password'], saltRounds);
 
   next();
+}
+
+function createToken() {
+  return Math.random().toString(36).slice(2);
+}
+
+function getUserAccount(req, res, next) {
+  const token = req.cookies.token;
+  const query = `SELECT account FROM sessions WHERE token = '${token}'`;
+  if(token) {
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err);
+      } else {
+        req.body.account = results[0].account;
+        return next();
+      }
+    })
+  }
 }
 
 

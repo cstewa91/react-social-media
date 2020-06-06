@@ -29,13 +29,13 @@ module.exports = function (app) {
         bcrypt.compare(password, hashedPassword, function (errObj, resultObj) {
           if (resultObj) {
             const account = results[0].account;
-            const token = createToken();
+            const token = req.session.id
             const query = `INSERT INTO sessions (account, token) VALUES('${account}','${token}') ON DUPLICATE KEY UPDATE token = '${token}'`;
             connection.query(query, (err, results) => {
               if(err) {
                 return res.send(err)
               }
-              res.cookie('token', token, {maxAge: 60 * 60 * 1000 * 1, httpOnly: false})
+              res.cookie('token', token)
               return res.send({
                 success: true
               })
@@ -83,13 +83,13 @@ module.exports = function (app) {
             })
           } else {
             const account = String(results[0].account)
-            const token = createToken();
+            const token = req.session.id;
             const query = `INSERT INTO sessions (account, token) VALUES('${account}','${token}') ON DUPLICATE KEY UPDATE token = '${token}'`;
             connection.query(query, (err, results) => {
               if(err) {
                 return res.send(err)
               }
-              res.cookie('token', token, {maxAge: 60 * 60 * 1000 * 1, httpOnly: false})
+              res.cookie('token', token)
               return res.send({
                 success: true
               })
@@ -102,11 +102,57 @@ module.exports = function (app) {
 
   // GET USER INFO
   app.get('/api/users', (req, res) => {
-    const account = String(req.body.account);
+    if(req.query.account) {
+       const account = String(req.query.account);
+    } else {
+       account = String(req.body.account);
+    }
     const query = `SELECT firstname, lastname, email FROM users where account = '${account}'`
     connection.query(query, (err, results) => {
       if(err) {
-        return res.send({success: false})
+        return res.send({
+          success: false
+        })
+      } else {
+        return res.send(results)
+      }
+    })
+  })
+
+  // SUBMIT POST
+  app.post('/api/posts', (req, res) => {
+    const account = req.body.account;
+    const date = new Date();
+    const content = req.body['post'];
+    const query = `SELECT firstname, lastname FROM users where account = '${account}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send({
+          success: false
+        })
+      } else {
+        const firstname = results[0].firstname;
+        const lastname = results[0].lastname
+        const query = `INSERT INTO posts (account, firstname, lastname,  content, datePosted) VALUES('${account}','${firstname}','${lastname}','${content}','${date}')`
+        connection.query(query, (err, results) => {
+          if(err) {
+            return res.send(err)
+          } else {
+            return res.send({
+              success: true
+            })
+          }
+        })
+      }
+    })
+  })
+
+  // GET POSTS
+  app.get('/api/posts', (req, res) => {
+    const query = `SELECT * FROM posts`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err)
       } else {
         return res.send(results)
       }
@@ -123,12 +169,8 @@ function encryptPassword(req, res, next) {
   next();
 }
 
-function createToken() {
-  return Math.random().toString(36).slice(2);
-}
-
 function getUserAccount(req, res, next) {
-  const token = req.cookies.token;
+  const token = req.cookies['token'];
   const query = `SELECT account FROM sessions WHERE token = '${token}'`;
   if(token) {
     connection.query(query, (err, results) => {
@@ -139,6 +181,8 @@ function getUserAccount(req, res, next) {
         return next();
       }
     })
+  } else {
+    next();
   }
 }
 

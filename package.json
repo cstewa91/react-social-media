@@ -22,6 +22,7 @@
   "homepage": "https://github.com/cstewa91/react-social-media#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "cookie": "^0.4.1",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -31,6 +32,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
+    "parser": "^0.1.4",
     "redux-form": "^8.3.1",
     "redux-thunk": "^2.3.0"
   },

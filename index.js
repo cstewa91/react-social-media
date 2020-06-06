@@ -4,6 +4,7 @@ const cors = require('cors');
 const PORT = process.env.PORT || 9000;
 const { resolve } = require('path');
 const controller = require('./backend/controller');
+const session = require('express-session')
 
 const app = express();
 
@@ -17,6 +18,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
 app.use(cookieParser());
 app.use(express.static(resolve(__dirname, 'client', 'dist')));
+app.use(session({
+   resave: false,
+   saveUninitialized: false,
+   secret:"stuff",
+   cookie: {
+      maxAge: 1000 * 60 * 60 * 2,
+      sameSite: true,
+      secure: false,
+      httpOnly: false
+   }
+}))
 
 controller(app);
 

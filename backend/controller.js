@@ -102,8 +102,9 @@ module.exports = function (app) {
 
   // GET USER INFO
   app.get('/api/users', (req, res) => {
+    let account = ""
     if(req.query.account) {
-       const account = String(req.query.account);
+       account = String(req.query.account);
     } else {
        account = String(req.body.account);
     }
@@ -149,7 +150,12 @@ module.exports = function (app) {
 
   // GET POSTS
   app.get('/api/posts', (req, res) => {
-    const query = `SELECT * FROM posts`
+    if(req.query.account) {
+      const account = String(req.query.account);
+      const query = `SELECT * FROM posts where account = '${account}`
+   } else {
+      query = `SELECT * FROM posts`
+   }
     connection.query(query, (err, results) => {
       if(err) {
         return res.send(err)

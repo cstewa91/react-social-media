@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from '../../actions'
-import { submitPost } from '../../actions'
 import './home.css';
 import Feed from '../feed/feed'
 
@@ -12,13 +11,8 @@ class Home extends Component {
         await this.props.getUserInfo();
     }
 
-    handlePost = async (values) => {
-        await this.props.submitPost(values) 
-    }
-
     render() {
         const {firstname} = this.props.user
-        const { handleSubmit, signInError } = this.props
         return (
             <div className="container">
                 <div className="account-container">
@@ -32,14 +26,8 @@ class Home extends Component {
                     <div><Link to='/clubs' className="create-account" >Clubs</Link></div>
                     <div><Link to='/events' className="create-account" >Events</Link></div>
                 </div>
-                <div className="post-area">
-                    <form onSubmit={handleSubmit(this.handlePost)}>
-                        <Field name="post" component='textarea'/>
-                        <button className="btn">POST</button>
-                    </form>
-                </div>
                 <div className="feed-container">
-                    <Feed />
+                    <Feed/>
                 </div>
             </div>
 
@@ -53,16 +41,8 @@ function mapStateToProps(state) {
     }
  }
 
- function validate() {
 
- }
-
- Home = reduxForm({
-    form: 'home',
-    validate: validate
- })(Home);
 
 export default connect(mapStateToProps, {
     getUserInfo: getUserInfo,
-    submitPost: submitPost
 })(Home);

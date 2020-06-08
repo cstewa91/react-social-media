@@ -7,6 +7,7 @@ import Books from './books/books';
 import Clubs from './clubs/clubs';
 import Events from './school-events/events';
 import StudyGroups from './study-groups/study-groups';
+import Profile from './profile/profile'
 import Header from './header/header';
 import Reroute from './reroute/reroute'
 
@@ -24,6 +25,7 @@ class App extends Component {
                     <Route path='/clubs' component={Clubs} />
                     <Route path='/events' component={Events} />
                     <Route path='/study-groups' component={StudyGroups} />
+                    <Route path='/profile/:account' component={Reroute(Profile)} />
                 </Switch>
             </Fragment>
         )

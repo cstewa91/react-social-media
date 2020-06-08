@@ -12,9 +12,23 @@ class Profile extends Component {
         await this.props.getPosts(this.props.match.params.account)
     }
 
+    renderPosts = () => {
+        console.log(this.props.posts)
+        const posts = this.props.posts.map((post, i) => {
+            return (
+                <div key={i}>{post.content}</div>
+            )
+        })
+
+        return posts
+    }
+
     render () {
         return (
-            <div>{this.props.user.firstname}</div>
+            <div>
+                <div>{this.props.user.firstname}</div>
+                <div>{this.renderPosts()}</div>
+            </div>
         )
     }
 }

@@ -49,7 +49,7 @@ export function submitPost(item) {
 export function getPosts(item) {
     return async function(dispatch) {
         const resp = await axios.get(API_POSTS, {
-            param: {
+            params: {
                 account: item
             }
         })
@@ -64,7 +64,12 @@ export function getPosts(item) {
 
 export function getPostData(item) {
     return async function(dispatch) {
-        const resp =  await axios.get(API_USERS, item);
+        const resp =  await axios.get(API_USERS, {
+            params: {
+                account: item
+            }
+        });
+        console.log(resp)
         return resp
     }
 }

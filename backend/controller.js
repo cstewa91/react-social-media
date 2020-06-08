@@ -150,9 +150,10 @@ module.exports = function (app) {
 
   // GET POSTS
   app.get('/api/posts', (req, res) => {
+    let query =''
     if(req.query.account) {
       const account = String(req.query.account);
-      const query = `SELECT * FROM posts where account = '${account}`
+      query = `SELECT * FROM posts where account = '${account}'`
    } else {
       query = `SELECT * FROM posts`
    }

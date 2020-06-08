@@ -8,9 +8,24 @@ import { submitPost } from '../../actions'
 import './feed.css';
 
 class Feed extends Component {
-    state = {}
+    state = {
+        posts: []
+    }
     componentDidMount = async () => {
         await this.props.getPosts();
+        await this.setPostsToState()
+
+    }
+
+    setPostsToState = async () => {
+        this.props.posts.map(async (post, i) => {
+            let userData = await this.props.getPostData(post.account)
+            post.firstname = userData.data[0].firstname
+            post.lastname = userData.data[0].lastname
+            this.setState(prevState => ({
+                posts: [...prevState.posts, post]
+            }))
+        })
     }
 
     handlePost = async (values) => {
@@ -19,17 +34,17 @@ class Feed extends Component {
     }
 
     renderPosts = () => {
-        const data = []
-        const hello = this.props.posts.map((post, i) => {
+        const post = this.state.posts.map((post, i) => {
             return(
                 <div key={i}>
                     <p>{`${post.firstname} ${post.lastname}`}</p>
                     <p>{post.content}</p>
                 </div>
             )
+
         })
 
-        return hello
+        return post
     }
 
 

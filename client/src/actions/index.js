@@ -2,8 +2,9 @@ import types from './types';
 import axios from 'axios';
 
 const API_LOGIN = '/api/login';
-const API_USERS = '/api/users'
-const API_POSTS = '/api/posts'
+const API_USERS = '/api/users';
+const API_POSTS = '/api/posts';
+const API_FRIENDS = '/api/friends'
 axios.defaults.withCredentials = true;
 
 export function loginToApp(item) {
@@ -71,5 +72,33 @@ export function getPostData(item) {
         });
         console.log(resp)
         return resp
+    }
+}
+
+export function checkIfFriend(item) {
+    return async function(dispatch) {
+        const resp = await axios.get(API_FRIENDS, {
+            params: {
+                friend: item
+            }
+        })
+        if(resp.data[0]) {
+            dispatch({
+                type: types.CHECK_IF_FRIEND,
+                payload: resp
+            })
+        }
+    }
+}
+
+export function addFriend(item) {
+    return async function(dispatch) {
+        const resp = await axios.post(API_FRIENDS, {
+            params: {
+                friend: item
+            }
+        })
+
+        console.log(resp)
     }
 }

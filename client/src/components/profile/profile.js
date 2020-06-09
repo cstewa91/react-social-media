@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from '../../actions'
 import { getPosts } from '../../actions'
+import { checkIfFriend } from '../../actions'
+import { addFriend } from '../../actions'
 import './profile.css';
 
 class Profile extends Component {
@@ -12,8 +14,24 @@ class Profile extends Component {
         await this.props.getPosts(this.props.match.params.account)
     }
 
+    handleAddFriend = async () => {
+        this.props.addFriend(this.props.match.params.account)
+    }
+
+    renderFriendButton = () => {
+        this.props.checkIfFriend(this.props.match.params.account)
+        if(!this.props.isFriend) {
+            return (
+                <button className="btn" onClick={this.handleAddFriend}>ADD FRIEND</button>
+            )
+        } else {
+            return (
+                <button className="btn">ALREADY FRIENDS</button>
+            )
+        }
+    }
+
     renderPosts = () => {
-        console.log(this.props.posts)
         const posts = this.props.posts.map((post, i) => {
             return (
                 <div key={i}>{post.content}</div>
@@ -28,6 +46,7 @@ class Profile extends Component {
             <div>
                 <div>{this.props.user.firstname}</div>
                 <div>{this.renderPosts()}</div>
+                <div>{this.renderFriendButton()}</div>
             </div>
         )
     }
@@ -37,6 +56,7 @@ function mapStateToProps(state) {
     return {
         user: state.userInfo.user,
         posts: state.posts.posts,
+        isFriend: state.friends.isFriend
     }
  }
 
@@ -45,4 +65,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     getPosts: getPosts,
     getUserInfo: getUserInfo,
+    checkIfFriend: checkIfFriend,
+    addFriend: addFriend,
 })(Profile);

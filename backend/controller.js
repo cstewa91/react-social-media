@@ -166,6 +166,33 @@ module.exports = function (app) {
     })
   })
 
+  // CHECK IF FRIEND 
+  app.get('/api/friends', (req, res) => {
+    const friend = req.query.friend;
+    const query = `SELECT account FROM friends where friend_account = '${friend}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err)
+      } else {
+        return res.send(results)
+      }
+    })
+  })
+
+  // ADD FRIEND
+  app.post('/api/friends', (req, res) => {
+    const friend = req.body.params.friend;
+    const account = req.body.account
+    const query = `INSERT INTO friends (account, friend_account) VALUES('${account}', '${friend}')`
+    connection.query(query, (err, results) => {
+      if(err) {
+        res.send(err)
+      } else {
+        res.send(results)
+      }
+    })
+  })
+
 }
 
 function encryptPassword(req, res, next) {

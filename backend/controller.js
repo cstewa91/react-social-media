@@ -193,6 +193,25 @@ module.exports = function (app) {
     })
   })
 
+  // GET ALL FRIENDS
+  app.get('/api/all-friends', (req, res) => {
+    let account = "";
+    if(req.query.account) {
+      account = req.query.account;
+    } else {
+      account = req.body.account;
+    }
+    const query = `SELECT * FROM friends where account = '${account}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err)
+      } else {
+        return res.send(results)
+      }
+    })
+
+  })
+
 }
 
 function encryptPassword(req, res, next) {

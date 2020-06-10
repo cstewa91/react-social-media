@@ -5,5 +5,6 @@ export default {
     SUBMIT_POST: 'submit_post',
     GET_POSTS: 'get_posts',
     CHECK_IF_FRIEND: 'get_if_friend',
-    ADD_FRIEND: 'add_friend'
+    ADD_FRIEND: 'add_friend',
+    GET_ALL_FRINDS: 'get_all_friends'
 }

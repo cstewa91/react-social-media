@@ -6,6 +6,7 @@ import { getUserInfo } from '../../actions'
 import { getPosts } from '../../actions'
 import { checkIfFriend } from '../../actions'
 import { addFriend } from '../../actions'
+import Friends from '../friends/friends'
 import './profile.css';
 
 class Profile extends Component {
@@ -47,6 +48,7 @@ class Profile extends Component {
                 <div>{this.props.user.firstname}</div>
                 <div>{this.renderPosts()}</div>
                 <div>{this.renderFriendButton()}</div>
+                <div><Friends userAccount={this.props.match.params.account}/></div>
             </div>
         )
     }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getUserInfo } from '../../actions'
 import './home.css';
 import Feed from '../feed/feed'
+import Friends from '../friends/friends'
 
 class Home extends Component {
     componentDidMount = async () => {
@@ -28,6 +29,9 @@ class Home extends Component {
                 </div>
                 <div className="feed-container">
                     <Feed/>
+                </div>
+                <div className="friends-container">
+                    <Friends/>
                 </div>
             </div>
 

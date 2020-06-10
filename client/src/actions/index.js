@@ -5,6 +5,7 @@ const API_LOGIN = '/api/login';
 const API_USERS = '/api/users';
 const API_POSTS = '/api/posts';
 const API_FRIENDS = '/api/friends'
+const API_ALL_FRIENDS = '/api/all-friends'
 axios.defaults.withCredentials = true;
 
 export function loginToApp(item) {
@@ -70,7 +71,6 @@ export function getPostData(item) {
                 account: item
             }
         });
-        console.log(resp)
         return resp
     }
 }
@@ -98,7 +98,21 @@ export function addFriend(item) {
                 friend: item
             }
         })
+    }
+}
 
-        console.log(resp)
+export function getFriends(item) {
+    return async function(dispatch) {
+        const resp = await axios.get(API_ALL_FRIENDS, {
+            params: {
+                account: item
+            }
+        })
+        if(resp.data[0]) {
+            dispatch({
+                type: types.GET_ALL_FRINDS,
+                payload: resp
+            })
+        }
     }
 }

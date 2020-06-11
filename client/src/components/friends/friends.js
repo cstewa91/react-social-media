@@ -19,7 +19,6 @@ class Friends extends Component {
     setFriendsToState = async () => {
         this.props.friends.map(async (friend, i) => {
             let userData = await this.props.getUserInfo(friend.friend_account)
-            console.log(this.props.friendInfo)
             let userObj = {}
             userObj.account = friend.friend_account
             userObj.name = `${this.props.friendInfo.firstname} ${this.props.friendInfo.lastname}`

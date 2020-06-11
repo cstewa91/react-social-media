@@ -37,7 +37,7 @@ class Feed extends Component {
         const post = this.state.posts.map((post, i) => {
             return(
                 <div key={i}>
-                    <p>{`${post.firstname} ${post.lastname}`}</p>
+                    <Link to={`/profile/${post.account}`}><p>{`${post.firstname} ${post.lastname}`}</p></Link>
                     <p>{post.content}</p>
                 </div>
             )

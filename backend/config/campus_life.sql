@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 08, 2020 at 03:34 AM
+-- Generation Time: Jun 19, 2020 at 03:23 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -17,14 +17,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `friends`
+--
+
+CREATE TABLE `friends` (
+  `account` int(10) UNSIGNED NOT NULL,
+  `friend_account` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`account`, `friend_account`) VALUES
+(1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
   `postId` int(11) NOT NULL,
   `account` int(11) NOT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
   `content` varchar(10000) NOT NULL,
   `datePosted` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -33,8 +49,9 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`postId`, `account`, `firstname`, `lastname`, `content`, `datePosted`) VALUES
-(31, 1, 'john', 'doe', 'this is a test post', 'Sun Jun 07 2020 16:50:36 GMT-0700 (Pacific Daylight Time)');
+INSERT INTO `posts` (`postId`, `account`, `content`, `datePosted`) VALUES
+(31, 1, 'this is a test post', 'Sun Jun 07 2020 16:50:36 GMT-0700 (Pacific Daylight Time)'),
+(32, 2, 'Hello I am jane\n', 'Sun Jun 07 2020 23:09:34 GMT-0700 (Pacific Daylight Time)');
 
 -- --------------------------------------------------------
 
@@ -52,8 +69,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`account`, `token`) VALUES
-(2, '05ipEJz2YcP08tu0aOT6QYWN2mddnjY2'),
-(1, '9oOt8Nr2y0z8Ysp9YBeyJyRQIDgRBMkx');
+(1, 'BcO-c14v5m5w1cdW_Lws42CXFk--_TKX'),
+(2, 'nDX9b9VwDQObohMmf3Yl7Ki4B0mGgHZA');
 
 -- --------------------------------------------------------
 
@@ -80,6 +97,13 @@ INSERT INTO `users` (`account`, `firstname`, `lastname`, `email`, `password`) VA
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `friends`
+--
+ALTER TABLE `friends`
+  ADD PRIMARY KEY (`account`,`friend_account`),
+  ADD KEY `FK_FRIENDS_2` (`friend_account`);
 
 --
 -- Indexes for table `posts`
@@ -109,7 +133,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `sessions`
@@ -122,3 +146,14 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `users`
   MODIFY `account` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `friends`
+--
+ALTER TABLE `friends`
+  ADD CONSTRAINT `FK_FRIENDS_1` FOREIGN KEY (`account`) REFERENCES `users` (`account`),
+  ADD CONSTRAINT `FK_FRIENDS_2` FOREIGN KEY (`friend_account`) REFERENCES `users` (`account`);

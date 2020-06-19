@@ -25,7 +25,8 @@ class App extends Component {
                     <Route path='/clubs' component={Clubs} />
                     <Route path='/events' component={Events} />
                     <Route path='/study-groups' component={StudyGroups} />
-                    <Route path='/profile/:account' component={Reroute(Profile)} />
+                    <Route path='/profile/:account'  render={(props) => ( <Profile key={props.match.params.account} 
+                    {...props} />)} />
                 </Switch>
             </Fragment>
         )

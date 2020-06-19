@@ -82,9 +82,15 @@ export function checkIfFriend(item) {
                 friend: item
             }
         })
+        console.log(resp.data)
         if(resp.data[0]) {
             dispatch({
                 type: types.CHECK_IF_FRIEND,
+                payload: resp
+            })
+        } else {
+            dispatch({
+                type: types.NOT_A_FRIEND,
                 payload: resp
             })
         }
@@ -111,6 +117,11 @@ export function getFriends(item) {
         if(resp.data[0]) {
             dispatch({
                 type: types.GET_ALL_FRINDS,
+                payload: resp
+            })
+        } else {
+            dispatch({
+                type: types.HAS_NO_FRIENDS,
                 payload: resp
             })
         }

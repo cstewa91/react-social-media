@@ -13,7 +13,9 @@ class Profile extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo(this.props.match.params.account)
         await this.props.getPosts(this.props.match.params.account)
+        // console.log(this.props)
     }
+
 
     handleAddFriend = async () => {
         this.props.addFriend(this.props.match.params.account)
@@ -48,7 +50,7 @@ class Profile extends Component {
                 <div>{this.props.user.firstname}</div>
                 <div>{this.renderPosts()}</div>
                 <div>{this.renderFriendButton()}</div>
-                <div><Friends userAccount={this.props.match.params.account}/></div>
+                <div><Friends userAccount={this.props.match.params.account} key={this.props.match.params.account} /></div>
             </div>
         )
     }

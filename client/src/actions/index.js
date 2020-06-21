@@ -26,16 +26,21 @@ export function createNewAccount(item) {
     }
 }
 
-export function getUserInfo(item) {
+export function getUserInfo(item, component) {
     return async function(dispatch) {
         const resp = await axios.get(API_USERS, {
             params: {
                 account: item
             }
         })
-        if(resp.data[0]) {
+        if(resp.data[0] && !item || component == 'profile') {
             dispatch({
                 type: types.GET_USER_INFO,
+                payload: resp
+            })
+        } else {
+            dispatch({
+                type: types.GET_FRIEND_INFO,
                 payload: resp
             })
         }
@@ -82,7 +87,6 @@ export function checkIfFriend(item) {
                 friend: item
             }
         })
-        console.log(resp.data)
         if(resp.data[0]) {
             dispatch({
                 type: types.CHECK_IF_FRIEND,

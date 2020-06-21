@@ -10,6 +10,7 @@ import Friends from '../friends/friends'
 class Home extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo();
+        console.log(this.props)
     }
 
     render() {

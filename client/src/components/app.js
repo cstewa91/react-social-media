@@ -16,7 +16,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Header />
+                <Route component={Header}/>
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route path='/create-account' component={CreateNewAccount} />

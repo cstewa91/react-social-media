@@ -55,7 +55,7 @@ class Friends extends Component {
 function mapStateToProps(state) {
     return {
         friends: state.friends.friends,
-        friendInfo: state.userInfo.user
+        friendInfo: state.userInfo.friend
     }
 }
 

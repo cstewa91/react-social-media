@@ -11,7 +11,7 @@ import './profile.css';
 
 class Profile extends Component {
     componentDidMount = async () => {
-        await this.props.getUserInfo(this.props.match.params.account)
+        await this.props.getUserInfo(this.props.match.params.account, 'profile')
         await this.props.getPosts(this.props.match.params.account)
         // console.log(this.props)
     }

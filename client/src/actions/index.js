@@ -131,3 +131,11 @@ export function getFriends(item) {
         }
     }
 }
+
+export function logOut() {
+    return async function(dispatch) {
+        dispatch({
+            type: types.LOG_OUT
+        })
+    }
+}

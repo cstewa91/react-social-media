@@ -58,7 +58,7 @@
     "file-loader": "^4.3.0",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
-    "react-cookie": "^4.0.3",
+    "react-cookies": "^0.1.1",
     "react-hot-loader": "^4.12.21",
     "regenerator-runtime": "^0.13.5",
     "sass-loader": "^8.0.2",

@@ -13,7 +13,7 @@ import App from './components/app';
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk, reduxPromise));
 
-console.log(Cookies.get('token'))
+
 if(Cookies.get('token')) {
     store.dispatch({
         type: types.LOGIN_TO_APP

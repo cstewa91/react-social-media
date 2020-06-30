@@ -14,4 +14,5 @@ class StudyGroup extends Component  {
     }
 }
 
+
 export default (StudyGroup);

@@ -37,6 +37,6 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "react-cookie": "^4.0.3"
+
   }
 }

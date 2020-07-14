@@ -1,0 +1,53 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sign-up {
+    display: flex;
+    flex-flow: row;
+    height: 100vh;
+
+    .sign-up-container {
+        flex: 1 0 23%;
+        display: flex;
+        flex-flow: column;
+        padding: 200px 120px 0;
+        h1 {
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        
+        .sub-text {
+            margin-top: 0;
+            a {
+                text-decoration: underline;
+            }
+        }
+        
+        input {
+            width: 100%;
+        }
+        
+    }
+
+    .image-container {
+        position: relative;
+        flex: 0 0 60%;
+        background-image: url('../../assets/images/create-account.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        p {
+            position: absolute;
+            top: 0;
+            font-size: 42px;
+            color: white;
+            letter-spacing: 2px;
+            text-align: center;
+            max-width: 450px;
+            left: 140px;
+            top: 40px;
+            font-weight: 400;
+        }
+    }
+}

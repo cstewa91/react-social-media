@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    position: relative;
+}
+
+h1 {
+    font-family: acumin-pro-wide, sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    color: #393e46;
+    letter-spacing: 2px;
+}
+
+p {
+    font-family: acumin-pro, sans-serif;
+    font-weight: 300;
+    color: #b3b3b3;
+    font-size: 19px;
+}
+
+input {
+    font-family: acumin-pro, sans-serif;
+    font-weight: 300;
+    color: #b3b3b3;
+    font-size: 19px;
+    padding-bottom: 5px;
+}
+
+input::placeholder {
+    font-family: acumin-pro, sans-serif;
+    font-weight: 300;
+    color: #b3b3b3;
+    font-size: 19px;
+}
+
+p.small {
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 19px;
+    color: #222831;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #b3b3b3;
+}
+
+input::placeholder {
+    color: #b3b3b3;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.btn {
+    font-family: acumin-pro-wide, sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    color: #fff;
+    background: #32e0c4;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border-radius: 5px;
+    letter-spacing: 2px;
+}

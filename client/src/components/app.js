@@ -10,12 +10,13 @@ import StudyGroups from './study-groups/study-groups';
 import Profile from './profile/profile'
 import Header from './header/header';
 import Reroute from './reroute/reroute'
+import '../assets/scss/main.scss'
 
 
 class App extends Component {
     render() {
         return (
-            <Fragment>
+            <div>
                 <Route component={Header}/>
                 <Switch>
                     <Route exact path="/" component={Login} />
@@ -28,7 +29,7 @@ class App extends Component {
                     <Route path='/profile/:account'  render={(props) => ( <Profile key={props.match.params.account} 
                     {...props} />)} />
                 </Switch>
-            </Fragment>
+            </div>
         )
     }
 }

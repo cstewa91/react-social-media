@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { createNewAccount } from '../../actions'
 import Input from '../input/input';
-import './create-account.css'
+import './create-account.scss'
 import {Link} from 'react-router-dom'
+import createAccountImage from '../../assets/images/create-account.png'
 
 class CreateNewAccount extends Component {
    handleCreateAccount = async (values) => {
@@ -25,28 +26,22 @@ class CreateNewAccount extends Component {
    render() {
       const { handleSubmit, invalidEmail, invalidUsername } = this.props
       return (
-         <div>
+         <div className="sign-up container">
+            <div className="sign-up-container">
+               <h1>Create an Account</h1>
+               <p class="sub-text">Already have one? <Link to={`/`}>Sign in.</Link></p>
                <form className="account-form row" onSubmit={handleSubmit(this.handleCreateAccount)}>
-                  <div>
-                     <Field name="firstname" label="First Name" maxLength='30' component={Input} inputClassName="create-account-user-input" errorClassName="create-account-error" />
-                  </div>
-                  <div className="create-account-input-padding col-8">
-                     <Field name="lastname" label="Last Name" maxLength='30' component={Input} inputClassName="create-account-user-input" errorClassName="create-account-error" />
-                  </div>
-                  <div>
-                     <Field name="email" label="E-mail" maxLength='40' component={Input} inputClassName="create-account-user-input" errorClassName="create-account-error" />
+                     <Field name="firstname" placeholder="First Name" maxLength='30' component={Input}  />
+                     <Field name="lastname" placeholder="Last Name" maxLength='30' component={Input} />
+                     <Field name="email" placeholder="Your School Email" maxLength='40' component={Input} />
                      <p className="create-account-error">{invalidEmail}</p>
-                  </div>
-                  <div>
-                     <Field name="password" label="Password" maxLength='30' component={Input} type="password" inputClassName="create-account-user-input" errorClassName="create-account-error" />
-                  </div>
-                  <div>
-                     <Field name="confirmPassword" label="Confirm Password" maxLength='30' component={Input} type="password" inputClassName="create-account-user-input" errorClassName="create-account-error" />
-                  </div>
-                  <div>
-                     <button>CONFIRM</button>
-                  </div>
+                     <Field name="password" placeholder="Password" maxLength='30' component={Input} type="password" />
+                     <button class="btn">Sign Up</button>
                </form>
+            </div>
+            <div className="image-container">
+               <p>CampusLife connects you with your peers.</p>
+            </div>
          </div>
       )
    }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
 import { logOut } from '../../actions'
-import './header.css';
+import './header.scss';
+import logo from '../../assets/images/logo.png'
 
 class Header extends Component {
     handleLogOut = async () => {
@@ -12,11 +13,24 @@ class Header extends Component {
 
     }
     render() {
-        return (
-            <header>
-                <button className="btn" onClick={this.handleLogOut}>Log Out</button>
-            </header>
-        )
+        if(this.props.location.pathname !== '/create-account' && this.props.location.pathname !== '/') {
+            return (
+                <header>
+                    <div className="logo-container">
+                        <img src={logo} alt={"logo"} className="logo"/>
+                    </div>
+                    <button className="btn" onClick={this.handleLogOut}>Log Out</button>
+                </header>
+            )
+        } else {
+            return (
+                <header className="create-account-header">
+                    <div className="logo-container">
+                        <img src={logo} alt={"logo"} className="logo"/>
+                    </div>
+                </header>
+            )
+        }
     }
 }
 

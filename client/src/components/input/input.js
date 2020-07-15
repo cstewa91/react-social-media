@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './input'
 
 class Input extends Component {
@@ -10,23 +10,20 @@ class Input extends Component {
    }
 
    render() {
-      const { input, label, inputClassName, labelClassName, errorClassName, loginActive, meta: { error, touched }, size, type = 'text', textArea, textAreaClassName, maxLength, min } = this.props
-      let floatText = labelClassName
+      const { input, label, inputClassName, labelClassName, errorClassName, loginActive, meta: { error, touched }, size, type = 'text', textArea, textAreaClassName, maxLength, min, placeholder } = this.props
       if (!textArea) {
          return (
-            <div>
-               <label htmlFor={input.name} className={floatText}>{label}</label>
-               <input {...input} type={type} id={input.name} label={label} size={size} className={inputClassName} min={min} maxLength={maxLength} onFocus={this.floatInputLabel} onBlur={this.landInputLabel} autoComplete="off" />
+            <Fragment>
+               <input {...input} type={type} id={input.name} label={label} size={size} className={inputClassName} min={min} maxLength={maxLength} placeholder={placeholder}/>
                <p className={errorClassName}>{touched && error}</p>
-            </div>
+            </Fragment>
          )
       }
       return (
-         <div>
-            <label htmlFor={input.name} className={floatText}>{label}</label>
-            <textarea {...input} type={type} id={input.name} label={label} size={size} className={textAreaClassName} min={min} maxLength={maxLength} onFocus={this.floatInputLabel} onBlur={this.landInputLabel} autoComplete="off" />
+         <Fragment>
+            <textarea {...input} type={type} id={input.name} label={label} size={size} className={textAreaClassName} min={min} maxLength={maxLength} placeholder={placeholder}/>
             <p className={errorClassName}>{touched && error}</p>
-         </div>
+         </Fragment>
       )
    }
 }

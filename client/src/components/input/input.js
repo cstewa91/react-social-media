@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './input'
 
 class Input extends Component {
@@ -13,17 +13,17 @@ class Input extends Component {
       const { input, label, inputClassName, labelClassName, errorClassName, loginActive, meta: { error, touched }, size, type = 'text', textArea, textAreaClassName, maxLength, min, placeholder } = this.props
       if (!textArea) {
          return (
-            <div>
+            <Fragment>
                <input {...input} type={type} id={input.name} label={label} size={size} className={inputClassName} min={min} maxLength={maxLength} placeholder={placeholder}/>
                <p className={errorClassName}>{touched && error}</p>
-            </div>
+            </Fragment>
          )
       }
       return (
-         <div>
+         <Fragment>
             <textarea {...input} type={type} id={input.name} label={label} size={size} className={textAreaClassName} min={min} maxLength={maxLength} placeholder={placeholder}/>
             <p className={errorClassName}>{touched && error}</p>
-         </div>
+         </Fragment>
       )
    }
 }

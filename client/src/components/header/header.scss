@@ -4,12 +4,14 @@ header {
 }
 
 .create-account-header {
-    padding: 60px 120px;
-    width: unset;
+    width: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1400px;
     .logo-container {
+        padding: 60px 120px;
         max-width: 200px;
         .logo {
             width: 100%;

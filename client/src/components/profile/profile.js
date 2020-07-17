@@ -7,7 +7,8 @@ import { getPosts } from '../../actions'
 import { checkIfFriend } from '../../actions'
 import { addFriend } from '../../actions'
 import Friends from '../friends/friends'
-import './profile.css';
+import profilePicture from '../../assets/images/download.png'
+import './profile.scss';
 
 class Profile extends Component {
     componentDidMount = async () => {
@@ -29,7 +30,7 @@ class Profile extends Component {
             )
         } else {
             return (
-                <button className="btn">ALREADY FRIENDS</button>
+                <button className="btn">FRIENDS</button>
             )
         }
     }
@@ -37,7 +38,12 @@ class Profile extends Component {
     renderPosts = () => {
         const posts = this.props.posts.map((post, i) => {
             return (
-                <div key={i}>{post.content}</div>
+                <div key={i}>
+                    <div><img src={profilePicture} alt=""/></div>
+                    <Link to={`/profile/${this.props.match.params.account}`}><p>{`${this.props.user.firstname} ${this.props.user.lastname}`}</p></Link>
+                    <p> </p>
+                    <p>{post.content}</p>
+                </div>
             )
         })
 
@@ -46,11 +52,23 @@ class Profile extends Component {
 
     render () {
         return (
-            <div>
-                <div>{this.props.user.firstname}</div>
-                <div>{this.renderPosts()}</div>
-                <div>{this.renderFriendButton()}</div>
-                <div><Friends userAccount={this.props.match.params.account} key={this.props.match.params.account} /></div>
+            <div className="main-container profile-container">
+                <div className="profile">
+                    <div className="profile-picture"><img src={profilePicture} alt=""/></div>
+                    <h1>{this.props.user.firstname}</h1>
+                    <p className="handler">@CollinS</p>
+                    <p className="description">Graphic Design & Marketing CSUSB, PDC, 2024</p>
+                    <div className="profile-buttons">
+                        <div>{this.renderFriendButton()}</div>
+                        <Link to={'message'}><button className="btn">Message</button></Link>
+                    </div>
+                </div>
+                <div className="posts-container">
+                    <div>{this.renderPosts()}</div>
+                </div>
+                {/* <div>
+                    <Friends userAccount={this.props.match.params.account} key={this.props.match.params.account} />
+                </div> */}
             </div>
         )
     }

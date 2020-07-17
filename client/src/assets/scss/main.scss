@@ -18,6 +18,13 @@ p {
     font-size: 19px;
 }
 
+a {
+    font-family: acumin-pro, sans-serif;
+    font-weight: 200;
+    color: #b3b3b3;
+    font-size: 19px;
+}
+
 input {
     font-family: acumin-pro, sans-serif;
     font-weight: 300;
@@ -34,6 +41,10 @@ input::placeholder {
     color: #b3b3b3;
     font-size: 19px;
     letter-spacing: 1px;;
+}
+
+img {
+    width: 100%;
 }
 
 p.small {
@@ -58,4 +69,14 @@ a {
     padding: 10px 30px;
     border-radius: 3px;
     letter-spacing: 2px;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 60%;
+    margin: 150px auto 0;
+}
+
+.profile-picture {
+    border-radius: 50%;;
 }

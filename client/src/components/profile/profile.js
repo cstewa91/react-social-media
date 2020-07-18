@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -37,12 +37,16 @@ class Profile extends Component {
 
     renderPosts = () => {
         const posts = this.props.posts.map((post, i) => {
+            var options = { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: '2-digit' };
+            var date  = new Date(post.datePosted);
             return (
-                <div key={i}>
-                    <div><img src={profilePicture} alt=""/></div>
-                    <Link to={`/profile/${this.props.match.params.account}`}><p>{`${this.props.user.firstname} ${this.props.user.lastname}`}</p></Link>
-                    <p> </p>
-                    <p>{post.content}</p>
+                <div key={i} className="post">
+                    <div className="post-profile-img"><img src={profilePicture} alt=""/></div>
+                    <div className="post-user-info">
+                        <Link to={`/profile/${this.props.match.params.account}`}><p>@Collins</p></Link>
+                        <p>{date.toLocaleDateString("en-US", options)}</p>
+                    </div>
+                    <p className="post-content">{post.content}</p>
                 </div>
             )
         })
@@ -64,7 +68,7 @@ class Profile extends Component {
                     </div>
                 </div>
                 <div className="posts-container">
-                    <div>{this.renderPosts()}</div>
+                    <Fragment>{this.renderPosts()}</Fragment>
                 </div>
                 {/* <div>
                     <Friends userAccount={this.props.match.params.account} key={this.props.match.params.account} />

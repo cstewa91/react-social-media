@@ -80,3 +80,34 @@ a {
 .profile-picture {
     border-radius: 50%;;
 }
+
+.post {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    padding: 30px 30px 40px 150px;
+    border: 0.5px solid #e8e8e8;
+    border-radius: 5px;
+    .post-profile-img {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        max-width: 100px;
+    }
+    .post-user-info {
+        display: flex;
+        letter-spacing: 1px;
+        a {
+            margin-right: 10px;
+        }
+        p {
+            font-weight: 300;
+            font-size: 16px;
+        }
+    }
+    .post-content {
+        font-size: 21px;
+        color: black;
+        letter-spacing: 1px;;
+    }
+}

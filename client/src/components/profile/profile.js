@@ -7,14 +7,13 @@ import { getPosts } from '../../actions'
 import { checkIfFriend } from '../../actions'
 import { addFriend } from '../../actions'
 import Friends from '../friends/friends'
-import profilePicture from '../../assets/images/download.png'
 import './profile.scss';
 
 class Profile extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo(this.props.match.params.account, 'profile')
         await this.props.getPosts(this.props.match.params.account)
-        // console.log(this.props)
+        console.log(this.props.user)
     }
 
 
@@ -35,13 +34,20 @@ class Profile extends Component {
         }
     }
 
+    profilePictureSrc = () => {
+        if(this.props.user.profilepicture != undefined) {
+            return require('../../assets/images/' + this.props.user.profilepicture);
+        }
+    }
+
     renderPosts = () => {
         const posts = this.props.posts.map((post, i) => {
-            var options = { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: '2-digit' };
-            var date  = new Date(post.datePosted);
+            let options = { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: '2-digit' };
+            let date  = new Date(post.datePosted);
+            let picUrl = require('../../assets/images/' + this.props.user.profilepicture)
             return (
                 <div key={i} className="post">
-                    <div className="post-profile-img"><img src={profilePicture} alt=""/></div>
+                    <div className="post-profile-img"><img src={this.profilePictureSrc()} alt=""/></div>
                     <div className="post-user-info">
                         <Link to={`/profile/${this.props.match.params.account}`}><p>@Collins</p></Link>
                         <p>{date.toLocaleDateString("en-US", options)}</p>
@@ -58,7 +64,7 @@ class Profile extends Component {
         return (
             <div className="main-container profile-container">
                 <div className="profile">
-                    <div className="profile-picture"><img src={profilePicture} alt=""/></div>
+                    <div className="profile-picture"><img src={this.profilePictureSrc()} alt=""/></div>
                     <h1>{this.props.user.firstname}</h1>
                     <p className="handler">@CollinS</p>
                     <p className="description">Graphic Design & Marketing CSUSB, PDC, 2024</p>

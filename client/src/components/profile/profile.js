@@ -13,12 +13,18 @@ class Profile extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo(this.props.match.params.account, 'profile')
         await this.props.getPosts(this.props.match.params.account)
-        console.log(this.props.user)
+        this.sortPosts()
     }
 
 
     handleAddFriend = async () => {
         this.props.addFriend(this.props.match.params.account)
+    }
+
+    sortPosts = () => {
+        this.props.posts.sort(function(a,b) {
+            return new Date(b.datePosted) - new Date(a.datePosted)
+        })
     }
 
     renderFriendButton = () => {
@@ -44,12 +50,11 @@ class Profile extends Component {
         const posts = this.props.posts.map((post, i) => {
             let options = { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: '2-digit' };
             let date  = new Date(post.datePosted);
-            let picUrl = require('../../assets/images/' + this.props.user.profilepicture)
             return (
                 <div key={i} className="post">
                     <div className="post-profile-img"><img src={this.profilePictureSrc()} alt=""/></div>
                     <div className="post-user-info">
-                        <Link to={`/profile/${this.props.match.params.account}`}><p>@Collins</p></Link>
+                    <Link to={`/profile/${this.props.match.params.account}`}><p>@{this.props.user.handler}</p></Link>
                         <p>{date.toLocaleDateString("en-US", options)}</p>
                     </div>
                     <p className="post-content">{post.content}</p>
@@ -66,8 +71,8 @@ class Profile extends Component {
                 <div className="profile">
                     <div className="profile-picture"><img src={this.profilePictureSrc()} alt=""/></div>
                     <h1>{this.props.user.firstname}</h1>
-                    <p className="handler">@CollinS</p>
-                    <p className="description">Graphic Design & Marketing CSUSB, PDC, 2024</p>
+                    <p className="handler">@{this.props.user.handler}</p>
+                    <p className="major">{this.props.user.major}</p>
                     <div className="profile-buttons">
                         <div>{this.renderFriendButton()}</div>
                         <Link to={'message'}><button className="btn">Message</button></Link>

@@ -18,6 +18,13 @@ p {
     font-size: 19px;
 }
 
+a {
+    font-family: acumin-pro, sans-serif;
+    font-weight: 200;
+    color: #b3b3b3;
+    font-size: 19px;
+}
+
 input {
     font-family: acumin-pro, sans-serif;
     font-weight: 300;
@@ -34,6 +41,10 @@ input::placeholder {
     color: #b3b3b3;
     font-size: 19px;
     letter-spacing: 1px;;
+}
+
+img {
+    width: 100%;
 }
 
 p.small {
@@ -58,4 +69,46 @@ a {
     padding: 10px 30px;
     border-radius: 3px;
     letter-spacing: 2px;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 60%;
+    margin: 150px auto 0;
+}
+
+.profile-picture {
+    border-radius: 50%;;
+}
+
+.post {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    padding: 30px 30px 40px 150px;
+    border: 0.5px solid #e8e8e8;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    .post-profile-img {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        max-width: 100px;
+    }
+    .post-user-info {
+        display: flex;
+        letter-spacing: 1px;
+        a {
+            margin-right: 10px;
+        }
+        p {
+            font-weight: 300;
+            font-size: 16px;
+        }
+    }
+    .post-content {
+        font-size: 21px;
+        color: black;
+        letter-spacing: 1px;;
+    }
 }

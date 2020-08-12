@@ -10,7 +10,6 @@ import Friends from '../friends/friends'
 class Home extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo();
-        console.log(this.props)
     }
 
     render() {
@@ -21,12 +20,6 @@ class Home extends Component {
                     <div className="person-info">
                         <h1>{firstname}</h1>
                     </div>
-                </div>
-                <div className="link-container">
-                    <div><Link to='/study-groups' className="create-account" >Study Groups</Link></div>
-                    <div><Link to='/books' className="create-account" >Books</Link></div>
-                    <div><Link to='/clubs' className="create-account" >Clubs</Link></div>
-                    <div><Link to='/events' className="create-account" >Events</Link></div>
                 </div>
                 <div className="feed-container">
                     <Feed/>

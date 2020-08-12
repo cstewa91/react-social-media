@@ -1,0 +1,4 @@
+.posts-container {
+    max-height: 69vh;
+    overflow-y: scroll;
+}

@@ -29,14 +29,14 @@ class CreateNewAccount extends Component {
          <div className="sign-up container">
             <div className="sign-up-container">
                <h1>Create an Account</h1>
-               <p class="sub-text">Already have one? <Link to={`/`}>Sign in.</Link></p>
+               <p className="sub-text">Already have one? <Link to={`/`}>Sign in.</Link></p>
                <form className="account-form row" onSubmit={handleSubmit(this.handleCreateAccount)}>
                      <Field name="firstname" placeholder="First Name" maxLength='30' component={Input}  />
                      <Field name="lastname" placeholder="Last Name" maxLength='30' component={Input} />
                      <Field name="email" placeholder="Your School Email" maxLength='40' component={Input} />
                      <p className="create-account-error">{invalidEmail}</p>
                      <Field name="password" placeholder="Password" maxLength='30' component={Input} type="password" />
-                     <button class="btn">Sign Up</button>
+                     <button className="btn">Sign Up</button>
                </form>
             </div>
             <div className="image-container">

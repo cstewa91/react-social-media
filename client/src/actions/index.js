@@ -60,12 +60,10 @@ export function getPosts(item) {
                 account: item
             }
         })
-        if(resp.data[0]) {
-            dispatch( {
-                type: types.GET_POSTS,
-                payload: resp
-            }) 
-        }
+        dispatch( {
+            type: types.GET_POSTS,
+            payload: resp
+        }) 
     }
 }
 

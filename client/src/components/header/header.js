@@ -18,18 +18,18 @@ class Header extends Component {
             return (
                 <header className="header">
                     <div className="logo-container">
-                        <img src={logo} alt={"logo"} className="logo"/>
+                        <Link to={'/home'}><img src={logo} alt={"logo"} className="logo"/></Link>
                     </div>
                     <div className="links-container">
                         <div className="search-container">
                             <input id="search" type="text" placeholder="Search"/>
                         </div>
                         <div className="links">
-                            <Link to={'home'}>Feed</Link>
-                            <Link to={'messages'}>Messages</Link>
-                            <Link to={'friend-requests'}>Requests</Link>
-                            <Link to={'market-palce'}>Market Place</Link>
-                            <Link to={'account-settings'}>Settings</Link>
+                            <Link to={'/home'}>Feed</Link>
+                            <Link to={'/messages'}>Messages</Link>
+                            <Link to={'/friend-requests'}>Requests</Link>
+                            <Link to={'/market-palce'}>Market Place</Link>
+                            <Link to={'/account-settings'}>Settings</Link>
                         </div>
 
                     </div>

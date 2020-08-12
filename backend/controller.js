@@ -108,7 +108,10 @@ module.exports = function (app) {
     } else {
        account = String(req.body.account);
     }
-    const query = `SELECT firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
+    let query = `SELECT firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
+    if(req.query.account == req.body.account) {
+        query = `SELECT account, firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
+    }
     connection.query(query, (err, results) => {
       if(err) {
         return res.send({
@@ -146,7 +149,8 @@ module.exports = function (app) {
       const account = String(req.query.account);
       query = `SELECT * FROM posts where account = '${account}'`
    } else {
-      query = `SELECT * FROM posts`
+      const account = String(req.body.account);
+      query = `SELECT * FROM posts WHERE account = ${account} OR account IN (SELECT account FROM friends WHERE friend_account = ${account})`
    }
     connection.query(query, (err, results) => {
       if(err) {
@@ -192,7 +196,7 @@ module.exports = function (app) {
     } else {
       account = req.body.account;
     }
-    const query = `SELECT * FROM friends where account = '${account}'`
+    const query = `SELECT * FROM friends where friend_account = '${account}'`
     connection.query(query, (err, results) => {
       if(err) {
         return res.send(err)

@@ -28,15 +28,17 @@ class Profile extends Component {
     }
 
     renderFriendButton = () => {
-        this.props.checkIfFriend(this.props.match.params.account)
-        if(!this.props.isFriend) {
-            return (
-                <button className="btn" onClick={this.handleAddFriend}>ADD FRIEND</button>
-            )
-        } else {
-            return (
-                <button className="btn">FRIENDS</button>
-            )
+        if(!this.props.user.account) {
+            this.props.checkIfFriend(this.props.match.params.account)
+            if(!this.props.isFriend) {
+                return (
+                    <button className="btn" onClick={this.handleAddFriend}>ADD FRIEND</button>
+                )
+            } else {
+                return (
+                    <button className="btn">FRIENDS</button>
+                )
+            }
         }
     }
 
@@ -66,6 +68,13 @@ class Profile extends Component {
     }
 
     render () {
+        let button;
+        if(this.props.user.account) {
+            button = <Link to={'/edit-profile'}><button className="btn">Edit Profile</button></Link>
+        } else {
+            button = <Link to={'/message'}><button className="btn">Message</button></Link>
+
+        }
         return (
             <div className="main-container profile-container">
                 <div className="profile">
@@ -75,7 +84,7 @@ class Profile extends Component {
                     <p className="major">{this.props.user.major}</p>
                     <div className="profile-buttons">
                         <div>{this.renderFriendButton()}</div>
-                        <Link to={'message'}><button className="btn">Message</button></Link>
+                        {button}
                     </div>
                 </div>
                 <div className="posts-container">

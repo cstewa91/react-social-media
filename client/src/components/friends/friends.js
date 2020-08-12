@@ -18,9 +18,9 @@ class Friends extends Component {
 
     setFriendsToState = async () => {
         this.props.friends.map(async (friend, i) => {
-            let userData = await this.props.getUserInfo(friend.friend_account)
+            let userData = await this.props.getUserInfo(friend.account)
             let userObj = {}
-            userObj.account = friend.friend_account
+            userObj.account = friend.account
             userObj.name = `${this.props.friendInfo.firstname} ${this.props.friendInfo.lastname}`
             this.setState(prevState => ({
                 allFriends: [...prevState.allFriends, userObj]
@@ -33,7 +33,7 @@ class Friends extends Component {
             return (
                 <div key={i}>
                     <Link to={`/profile/${friend.account}`}>
-                        <p>{`${this.props.friendInfo.firstname} ${this.props.friendInfo.lastname}`}</p>
+                        <p>{`${friend.name}`}</p>
                     </Link>
                 </div>
             )

@@ -207,6 +207,19 @@ module.exports = function (app) {
 
   })
 
+  // GET NUMBER OF FRIENDS
+  app.get('/api/number-of-friends', (req, res) => {
+    let account = req.query.account;
+    const query = `SELECT COUNT(*) AS totalFriends FROM friends where friend_account = '${account}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err)
+      } else {
+        return res.send(results)
+      }
+    })
+  })
+
 }
 
 function encryptPassword(req, res, next) {

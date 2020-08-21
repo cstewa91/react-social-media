@@ -6,6 +6,7 @@ const API_USERS = '/api/users';
 const API_POSTS = '/api/posts';
 const API_FRIENDS = '/api/friends'
 const API_ALL_FRIENDS = '/api/all-friends'
+const API_NUMBER_OF_FRIENDS = '/api/number-of-friends'
 axios.defaults.withCredentials = true;
 
 export function loginToApp(item) {
@@ -134,6 +135,20 @@ export function logOut() {
     return async function(dispatch) {
         dispatch({
             type: types.LOG_OUT
+        })
+    }
+}
+
+export function getNumberOfFriends(item) {
+    return async function(dispatch) {
+        const resp = await axios.get(API_NUMBER_OF_FRIENDS, {
+            params: {
+                account: item
+            }
+        })
+        dispatch({
+            type: types.GET_NUMBER_OF_FRIENDS,
+            payload: resp
         })
     }
 }

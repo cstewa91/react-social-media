@@ -10,6 +10,7 @@ import StudyGroups from './study-groups/study-groups';
 import Profile from './profile/profile'
 import Header from './header/header';
 import Reroute from './reroute/reroute'
+import Messages from './messages/messages'
 import '../assets/scss/main.scss'
 
 
@@ -26,8 +27,8 @@ class App extends Component {
                     <Route path='/clubs' component={Clubs} />
                     <Route path='/events' component={Events} />
                     <Route path='/study-groups' component={StudyGroups} />
-                    <Route path='/profile/:account'  render={(props) => ( <Profile key={props.match.params.account} 
-                    {...props} />)} />
+                    <Route path='/profile/:account'  render={(props) => ( <Profile key={props.match.params.account} {...props} />)} />
+                    <Route path='/messages/:account' render={(props) => ( <Messages key={props.match.params.account} {...props} />)} />
                 </Switch>
             </div>
         )

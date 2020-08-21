@@ -6,6 +6,7 @@ import { getUserInfo } from '../../actions'
 import { getPosts } from '../../actions'
 import { checkIfFriend } from '../../actions'
 import { addFriend } from '../../actions'
+import { getNumberOfFriends } from '../../actions'
 import Friends from '../friends/friends'
 import './profile.scss';
 
@@ -13,6 +14,7 @@ class Profile extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo(this.props.match.params.account, 'profile')
         await this.props.getPosts(this.props.match.params.account)
+        await this.props.getNumberOfFriends(this.props.match.params.account)
         this.sortPosts()
     }
 
@@ -42,6 +44,10 @@ class Profile extends Component {
         }
     }
 
+    renderNumberOfFriends = () => {
+        return <p className="total-friends"><span>{this.props.numberFriends}</span> Friends</p>
+    }
+
     profilePictureSrc = () => {
         if(this.props.user.profilepicture != undefined) {
             return require('../../assets/images/' + this.props.user.profilepicture);
@@ -49,6 +55,7 @@ class Profile extends Component {
     }
 
     renderPosts = () => {
+        console.log(this.props.user.major)
         const posts = this.props.posts.map((post, i) => {
             let options = { year: 'numeric', month: 'long', day: '2-digit', hour: 'numeric', minute: '2-digit' };
             let date  = new Date(post.datePosted);
@@ -83,6 +90,7 @@ class Profile extends Component {
                     <p className="handler">@{this.props.user.handler}</p>
                     <p className="major">{this.props.user.major}</p>
                     <div className="profile-buttons">
+                        {this.renderNumberOfFriends()}
                         <div>{this.renderFriendButton()}</div>
                         {button}
                     </div>
@@ -102,7 +110,8 @@ function mapStateToProps(state) {
     return {
         user: state.userInfo.user,
         posts: state.posts.posts,
-        isFriend: state.friends.isFriend
+        isFriend: state.friends.isFriend,
+        numberFriends: state.totalFriends.numberOfFriends
     }
  }
 
@@ -113,4 +122,5 @@ export default connect(mapStateToProps, {
     getUserInfo: getUserInfo,
     checkIfFriend: checkIfFriend,
     addFriend: addFriend,
+    getNumberOfFriends: getNumberOfFriends
 })(Profile);

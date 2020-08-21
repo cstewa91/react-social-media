@@ -108,10 +108,7 @@ module.exports = function (app) {
     } else {
        account = String(req.body.account);
     }
-    let query = `SELECT firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
-    if(req.query.account == req.body.account) {
-        query = `SELECT account, firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
-    }
+    let query = `SELECT account, firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
     connection.query(query, (err, results) => {
       if(err) {
         return res.send({
@@ -205,6 +202,19 @@ module.exports = function (app) {
       }
     })
 
+  })
+
+  // GET NUMBER OF FRIENDS
+  app.get('/api/number-of-friends', (req, res) => {
+    let account = req.query.account;
+    const query = `SELECT COUNT(*) AS totalFriends FROM friends where friend_account = '${account}'`
+    connection.query(query, (err, results) => {
+      if(err) {
+        return res.send(err)
+      } else {
+        return res.send(results)
+      }
+    })
   })
 
 }

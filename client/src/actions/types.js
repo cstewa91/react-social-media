@@ -10,5 +10,6 @@ export default {
     HAS_NO_FRIENDS: 'has_no_friends',
     NOT_A_FRIEND: 'not_friend',
     GET_FRIEND_INFO: 'get_friend_info',
-    LOG_OUT: 'log_out'
+    LOG_OUT: 'log_out',
+    GET_NUMBER_OF_FRIENDS: 'get_number_of_friends'
 }

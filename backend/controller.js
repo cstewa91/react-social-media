@@ -108,10 +108,7 @@ module.exports = function (app) {
     } else {
        account = String(req.body.account);
     }
-    let query = `SELECT firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
-    if(req.query.account == req.body.account) {
-        query = `SELECT account, firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
-    }
+    let query = `SELECT account, firstname, lastname, email, profilepicture, major, handler FROM users where account = '${account}'`
     connection.query(query, (err, results) => {
       if(err) {
         return res.send({

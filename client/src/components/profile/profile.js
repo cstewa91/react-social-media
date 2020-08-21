@@ -46,7 +46,6 @@ class Profile extends Component {
 
     renderNumberOfFriends = () => {
         return <p className="total-friends"><span>{this.props.numberFriends}</span> Friends</p>
-        console.log(this.props.numberFriends)
     }
 
     profilePictureSrc = () => {

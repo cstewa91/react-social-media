@@ -28,7 +28,7 @@ class App extends Component {
                     <Route path='/events' component={Events} />
                     <Route path='/study-groups' component={StudyGroups} />
                     <Route path='/profile/:account'  render={(props) => ( <Profile key={props.match.params.account} {...props} />)} />
-                    <Route path='/messages/:account' render={(props) => ( <Messages key={props.match.params.account} {...props} />)} />
+                    <Route path='/messages/:account?' render={(props) => ( <Messages key={props.match.params.account} {...props} />)} />
                 </Switch>
             </div>
         )

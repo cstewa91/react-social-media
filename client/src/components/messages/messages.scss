@@ -2,6 +2,37 @@
     display: flex;
     .messages-friends {
         flex: 0 0 30%;
+        h1 {
+            margin-top: -16px;
+        }
+        .friends-container {
+            margin-top: 40px;
+            .friend {
+                padding: 20px 10px;
+                padding-right: 0px;
+                &.active {
+                    background-color: #f5f5f5;
+                }
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+                a {
+                    display: flex;
+                    align-items: center;
+                }
+                .profile-picture {
+                    flex: 0 0 50px;
+                    margin-right: 10px;
+                }
+                .info {
+                    flex: 1 0 50%;
+                    p {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
     }
     .message-container {
         flex: 0 0 60%;

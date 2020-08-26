@@ -57,6 +57,12 @@ a {
     color: #222831;
 }
 
+#root {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 100px;
+}
+
 .btn {
     font-family: acumin-pro-wide, sans-serif;
     font-weight: 800;
@@ -72,10 +78,15 @@ a {
     display: inline-block;
 }
 
-.main-container {
-    width: 100%;
-    max-width: 60%;
-    margin: 150px auto 0;
+.green-text {
+    color: #32e0c4;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.container {
+    margin: 0 auto;
+    padding-bottom: 100px;
 }
 
 .profile-picture {

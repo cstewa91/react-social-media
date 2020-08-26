@@ -45,7 +45,7 @@ class Profile extends Component {
     }
 
     renderNumberOfFriends = () => {
-        return <p className="total-friends"><span>{this.props.numberFriends}</span> Friends</p>
+        return <p className="total-friends"><span className="green-text">{this.props.numberFriends}</span> Friends</p>
     }
 
     profilePictureSrc = () => {
@@ -83,7 +83,7 @@ class Profile extends Component {
 
         }
         return (
-            <div className="main-container profile-container">
+            <div className="container profile-container">
                 <div className="profile">
                     <div className="profile-picture"><img src={this.profilePictureSrc()} alt=""/></div>
                     <h1>{this.props.user.firstname}</h1>

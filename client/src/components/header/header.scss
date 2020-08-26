@@ -8,13 +8,14 @@ header {
 .header {
     display: flex;
     margin: 0 auto;
-    padding: 50px 200px 0;
+    padding: 50px 0 0;
     justify-content: space-between;
+    margin-bottom: 150px;
     .logo-container {
-        flex: 0 0 15%;
+        flex: 0 0 225px;
     }
     .links-container {
-        flex: 0 0 80%;
+        flex: 1 0 70%;
         display: flex;
         flex-flow: column;
         align-items: flex-end;
@@ -42,7 +43,6 @@ header {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 1400px;
     .logo-container {
         padding: 60px 120px;
         max-width: 200px;

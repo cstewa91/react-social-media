@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/cstewa91/react-social-media#readme",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

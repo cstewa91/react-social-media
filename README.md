@@ -1,19 +1,25 @@
-# React Starter
+# Campus Life
 
-> This repo contains boilerplate code to aid in the creation of a new React app with Redux. Follow the below setup instructions to get started.
+> Social media platform focused on college students
 
 ### Setup Instructions
 
 > 1. Fork this repo
 > 1. Clone your forked copy of this repo
->    - `git clone https://github.com/[Your Username]/react_starter.git`
+>    - `git clone https://github.com/[Your Username]/react-social-media.git`
 > 1. Change directory into the newly cloned repo
->    - `cd react_starter`
+>    - `cd react-social-media`
+> 1. Install dependencies 
+>    - `npm install`
+> 1. Import mysql database from config folder
+>    - `campus_life.sql`
+> 1. Change directory into client folder
+>    - `cd client`
 > 1. Install dependencies 
 >    - `npm install`
 > 1. Start dev server
->    - `npm start`
-> 1. Open a browser and navigate to `localhost:3000` You should see a page that displays "Welcome to React!"
+>    - `npm run dev`
+> 1. Open a browser and navigate to `localhost:3000`
 
 ### Build For Deployment
 

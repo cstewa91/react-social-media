@@ -15,11 +15,11 @@
     "json:server": "json-server --watch db.json --port 8888",
     "dev": "concurrently \"npm start\" \"npm run json:server\""
   },
-  "author": "Scott Bowler",
+  "author": "Collin Stewart",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Learning-Fuze/react_starter.git"
+    "url": "https://github.com/cstewa91/react-social-media"
   },
   "dependencies": {
     "axios": "^0.19.2",

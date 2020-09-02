@@ -15,7 +15,6 @@ class Messages extends Component {
         messages: [],
         allFriends: [],
         currentFriend: {},
-        prevMessage: {},
     }
 
     componentDidMount = async () => {
@@ -43,7 +42,7 @@ class Messages extends Component {
             userObj.account = friend.account
             userObj.name = `${this.props.friendInfo.firstname} ${this.props.friendInfo.lastname}`
             userObj.picture = this.props.friendInfo.profilepicture
-            userObj.handler = this.props.friendInfo.handler
+            userObj.handler = `@${this.props.friendInfo.handler}`
             this.setState(prevState => ({
                 allFriends: [...prevState.allFriends, userObj]
             }))
@@ -63,6 +62,10 @@ class Messages extends Component {
     }
 
     renderFriends = () => {
+        this.state.allFriends.sort((a, b) => {
+                a.timeStamp - b.timeStamp
+        })
+        console.log(this.state.allFriends)
         const friend = this.state.allFriends.map((friend, i) => {
             if(friend.account == this.props.match.params.account) {
                 return (
@@ -113,7 +116,8 @@ class Messages extends Component {
                             allFriends: prevState.allFriends.map(
                                 el => el.account === key ? {
                                     ...el,
-                                    lastMessage: `${lastSender} ${message.text}`
+                                    lastMessage: `${lastSender} ${message.text}`,
+                                    timeStamp: message.timestamp.toDate()
                                 } : el
                             )
 
@@ -158,7 +162,7 @@ class Messages extends Component {
             <Fragment>
                 <Link to={`/profile/${this.state.currentFriend.account}`} className="message-bar-img"><div ><img src={this.profilePictureSrc(this.state.currentFriend.picture)} alt=""/></div></Link>
                 <Link to={`/profile/${this.state.currentFriend.account}`} className="message-bar-name "><p className="green-text">{friendName[0]}</p></Link>
-                <Link to={`/profile/${this.state.currentFriend.account}`} className="message-bar-handler"><p>@{this.state.currentFriend.handler}</p></Link>
+                <Link to={`/profile/${this.state.currentFriend.account}`} className="message-bar-handler"><p>{this.state.currentFriend.handler}</p></Link>
                 <div className="message-bar-menu"></div>
             </Fragment>
         )
@@ -171,7 +175,6 @@ class Messages extends Component {
             let messageImg = ''
             let prevmessage = ''
             let nextMessage = ''
-            console.log(message)
             if(message.account == this.props.user.account) {
                 position = "right"
                 messageImg = this.profilePictureSrc(this.props.user.profilepicture)

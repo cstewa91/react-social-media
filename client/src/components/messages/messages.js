@@ -20,7 +20,7 @@ class Messages extends Component {
     componentDidMount = async () => {
         await this.props.getUserInfo();
         await this.props.getFriends(this.props.userAccount);
-        await this.setFriendsToState()
+        this.setFriendsToState()
         this.getMessages()
     }
 
@@ -62,11 +62,9 @@ class Messages extends Component {
     }
 
     renderFriends = () => {
-        this.state.allFriends.sort((a, b) => {
-                a.timeStamp - b.timeStamp
-        })
-        console.log(this.state.allFriends)
-        const friend = this.state.allFriends.map((friend, i) => {
+        const friend = this.state.allFriends.sort((a, b) => {
+            return b.timeStamp - a.timeStamp;
+        }).map((friend, i) => {
             if(friend.account == this.props.match.params.account) {
                 return (
                     <div className="friend active" key={i}>
@@ -75,6 +73,7 @@ class Messages extends Component {
                                 <div className="info">
                                     <p className="green-text friend-name">{friend.name}</p>
                                     <p>{friend.lastMessage}</p>
+                                    <p>{friend.lastMessageTime}</p>
                                 </div>
                         </Link>
                     </div>
@@ -87,6 +86,7 @@ class Messages extends Component {
                                 <div className="info">
                                     <p className="green-text friend-name">{friend.name}</p>
                                     <p>{friend.lastMessage}</p>
+                                    <p>{friend.lastMessageTime}</p>
                                 </div>
                         </Link>
                     </div>
@@ -112,12 +112,28 @@ class Messages extends Component {
                     if (message.timestamp != null) {
                         let key = friendAccount;
                         let lastSender = message.account == userAccount ? 'You:' : ''
+                        let currentDate = new Date()
+                        let seconds = Math.floor(((currentDate) -  message.timestamp.toDate())/1000)
+                        let minutes = Math.floor(seconds/60)
+                        let hours = Math.floor(minutes/60)
+                        let days = Math.floor(hours/24)
+                        let messageTime = 'Just Now'
+                        if(minutes > 0) {
+                            messageTime = `${minutes} Mins`
+                        } 
+                        if(hours > 0) {
+                            messageTime = `${hours} Hours`
+                        } 
+                        if(days > 0) {
+                            messageTime = `${days} Days`
+                        } 
                         this.setState(prevState => ({
                             allFriends: prevState.allFriends.map(
                                 el => el.account === key ? {
                                     ...el,
                                     lastMessage: `${lastSender} ${message.text}`,
-                                    timeStamp: message.timestamp.toDate()
+                                    timeStamp: message.timestamp.toDate(),
+                                    lastMessageTime: messageTime
                                 } : el
                             )
 

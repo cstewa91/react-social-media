@@ -22,7 +22,7 @@
     "url": "https://github.com/cstewa91/react-social-media"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "firebase": "^7.18.0",
     "js-cookie": "^2.2.1",
     "react": "^16.13.0",
